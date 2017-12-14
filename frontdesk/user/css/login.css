@@ -1,0 +1,23 @@
+#content{ height: 600px; width: 100%; background: url("/sxxmall/frontdesk/base/images/guangao.jpg"); background-position: center center;}
+#login-layout{position: relative; height: 600px;}
+#login-form{ position: absolute; top: 120px; right: 60px; width: 290px; height: 270px; padding: 30px; background-color: rgba(255,255,255,.9);}
+#login-form h3{ color: #3c3c3c; font-family: '微软雅黑';}
+.field{ width:300px; height: 40px; margin-top: 20px; position: relative;}
+.text-label{ position: absolute; left:0px; background-color: #ddd; color: #fff; padding:4.5px; font-size: 22px; line-height: 32px; width:32px; height: 32px; text-align: center;}
+[name='password']{font-family: '微软雅黑';}
+.login-text{ width: 286px; height: 100%; border: 1px solid #ddd; text-indent: 50px;}
+#login-sub{ width: 286px; height: 40px; margin-top: 20px; position: relative; background-color: #f40; border: none; cursor: pointer; font-weight: bold; font-size: 16px; border-radius: 3px; color: #fff; letter-spacing: 5px;}
+#login-sub:hover{ background-color: #f52b00;}
+#otherLogin{ flaot:left; margin-top: 20px; font-size: 12px;}
+#otherLogin i{ color: #00c0ef;}
+#login-links{ float: right; font-size: 12px;}
+#login-links a{ margin-left: 10px;}
+#mes{ height: 33px; width: 276px; padding: 5px; font-size: 14px; color: #6C6C6C; position: absolute; top:30px; left:30px; border:#ffb4a8 1px solid; background-color: #fef2f2;
+display: none;
+}
+#gg{ width: 730px; height: 550px; position: absolute; top: 20px; left: 30px;}
+
+#footer{ color: #9c9c9c; width: 100%; text-align: center; margin-top: 100px;}
+
+a { blr:expression(this.onFocus=this.blur()); outline: none; }
+a:focus { outline: none; }

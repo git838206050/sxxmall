@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XX商城</title>
+    <link rel="stylesheet" href="/sxxmall/frontdesk/user/css/base.css" media="all">
+    <link rel="stylesheet" href="/sxxmall/frontdesk/user/css/login.css" media="all">
+    <link rel="stylesheet" href="/sxxmall/plugin/font-awesome/css/font-awesome.min.css" media="all">
+</head>
+<body>
+    <div class="mainBox">
+        <img id="logo" src="/sxxmall/frontdesk/base/images/logo.png" title="xx商城" alt="xx商城"/>
+    </div>
+    <div id="content">
+        <div class="mainBox" id="login-layout">
+            <form id="login-form" action="javascript:doLogin();">
+                <h3>密码登录</h3>
+                <div class="field">
+                    <label for="login_username" class="text-label"><i class="fa fa-user"></i></label>
+                    <input id="login_username" name="username" class="login-text" type="text" placeholder="请输入账号"/>
+                </div>
+                <div class="field">
+                    <label for="login_password" class="text-label"><i class="fa fa-key"></i></label>
+                    <input id="login_password" name="password" class="login-text" type="password" placeholder="请输入密码"/>
+                </div>
+                <input id="login-sub" type="submit" value="登录"/>
+                <div id="otherLogin">
+                    <!--
+                    <a href="#"><i class="fa fa-qq fa-1x"></i> qq登录</a>
+                    -->
+                </div>
+                <div id="login-links">
+                    <a href="#">忘记密码</a>
+                    <a href="#">免费注册</a>
+                </div>
+                <div id="mes">这是提示信息</div>
+            </form>
+            <a id="gg" href="#"></a>
+        </div>
+    </div>
+    <div id="footer">
+        <p>© 2017 lcvc.cn 版权所有</p>
+    </div>
+
+    <script src="/sxxmall/plugin/jquery/jquery-1.8.2.min.js"></script>
+    <script src="/sxxmall/plugin/jquery/jquery.cookie.js"></script>
+    <script src="/sxxmall/plugin/jquery/jquery.form.js"></script>
+    <script src="/sxxmall/frontdesk/user/js/login.js"></script>
+</body>
+</html>

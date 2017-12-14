@@ -1,0 +1,23 @@
+body,html{ width: 100%; height: 100%;margin: 0px; padding:0px;}
+#addressByLcy{ width: 300px; border: 1px solid #ccc; line-height: 30px; text-indent: 10px; color: #ccc; font-size: 14px; font-family: '微软雅黑'; cursor: pointer; position: relative;}
+
+.icon-down{ float: right; font-size: 16px !important; line-height: 30px !important; margin-right: 10px;}
+.addressBox{ width: 300px; display: none; border: 1px solid #ccc; position: absolute; top: 30px; left: -1px; z-index: 999999;}
+.addressHeaderBox{ height: 35px; line-height:  35px; text-align: center; border-bottom: 1px solid #ccc;background-color: #f0f0f0; color: #333; font-size: 14px;}
+.addressHeader{ float: left; width:74px; border-left: 1px solid #ccc;text-indent: 1px;}
+.addressHeader:first-child{ border-left: 1px solid #fff;text-indent: 0px;}
+.address-current{ border-bottom: 1px solid #fff; background-color: #fff; color: #f60;}
+
+.addressContent{ min-height: 10px; max-height: 215px; padding: 10px 15px; overflow: auto;text-indent: 0px; background-color: #fff;}
+
+#city-province dl::after{clear: both; content: " "; display: block; font-size: 0;  height: 0; visibility: hidden;}
+#city-province dl{ margin: 0px; padding:0px;}
+#city-province dt{width: 25px; float: left; padding-right: 10px; font-weight: 700; text-align: right; font-size: 12px; color: #333; line-height: 24px !important; font-family: 'arial';display: inline-block;}
+#city-province dd{width: 210px; margin: 0px; padding:0px; float: left;display: inline; text-indent: 0px;  line-height: 0px !important;}
+.addressContent a{padding: 0px 8px; white-space: nowrap; font-size: 12px; margin-right: 2px; line-height: 24px !important; color: #333; display: inline-block;}
+.addressContent a:hover{background-color: #fff8f3; border-radius: 2px; color: #f60;}
+.addressContent-current{ background-color: #f60 !important; color: #fff !important; border-radius: 2px;}
+
+#addressByLcyPlaceholder{ font-style: inherit;}
+
+#city-city,#city-district,#city-street{ display: none;}

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加商品</title>
+    <link rel="stylesheet" href="/sxxmall/plugin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/sxxmall/plugin/font-awesome/css/font-awesome.min.css">
+    <link href="/sxxmall/plugin/editor/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" type="text/css" href="/sxxmall/plugin/webuploader/css/webuploader.css" >
+    <link rel="stylesheet" type="text/css" href="/sxxmall/plugin/webuploader/css/style.css" >
+    <link href="/sxxmall/backstage/productmanage/css/addProduct.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/sxxmall/plugin/selectproductbylcy/css/selectProduct.css">
+    <link rel="stylesheet" href="/sxxmall/plugin/uploaderimagesbylcy/css/uploaderimagesbylcy.css">
+</head>
+<body>
+<!--javascript:formSubmit();-->
+<form class="layui-form" action="javascript:formSubmit();" method="post" style="padding-top: 20px;" id="addshop-form" enctype="multipart/form-data">
+    <!--<input name="adminId" type="text" value=""/>-->
+    <!--<input name="token" type="text" value=""/>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户账号：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="username" required  lay-verify="required" value="usenr123" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品名称：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="productname" required  lay-verify="required" value="123123" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">货存：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="stock" required  lay-verify="required" placeholder="请输入用户名" value="99" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品关键字：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="keyword" required  lay-verify="required" value="123123,asd,123" placeholder="关键字以,进行隔开" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品类型编号：</label>
+        <div class="layui-input-inline" style="width: 300px;" >
+            <input type="text" name="producttypeid" id="shopType" value="354" required onclick="getShopType(this,event)" lay-verify="required" placeholder="请输入或选取商品类型编号" autocomplete="off" class="layui-input"/>
+        </div>
+        <!-- 辅助文字 -->
+        <div class="layui-form-mid layui-word-aux" id="validateShopType"></div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">原价格：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="originalprive" required  lay-verify="required" value="123" placeholder="请输入店铺名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">折扣价格：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="discountprive" required  lay-verify="required" value="123" placeholder="请输入店铺名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品规格：</label>
+        <input type="text" style="display: none;"  name="skuValue" value=""/>
+        <input type="text" style="display: none;"  name="skuDetailedInof" value=""/>
+        <div id="sku">
+            <dl>
+                <dt>
+                    <input placeholder="销售属性名称" value="a"><i>:</i>
+                    <button type="button" class="addPropertyValue" title="添加属性值" alt="添加属性值">+</button>
+                    <button type="button" class="removePropertyValue" title="删除最后一个属性值" alt="删除最后一个属性值">-</button>
+                    <button type="button" class="convertPropertyOfImg" title="转换为图片显示的属性值" alt="转换为图片显示的属性值"><span class="fa fa-image"></span></button>
+                    <button type="button" class="convertPropertyOfText" title="转换为文字显示的属性值" alt="转换为文字显示的属性值">A</button>
+                </dt>
+
+                <dd><input placeholder="销售属性值" value="a1"></dd>
+                <dd><input placeholder="销售属性值" value="a2"></dd>
+                <dd><input placeholder="销售属性值" value="a3"></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+            </dl>
+            <hr />
+            <dl>
+                <dt>
+                    <input placeholder="销售属性名称" value="b"><i>:</i>
+                    <button type="button" class="addPropertyValue" title="添加属性值" alt="添加属性值">+</button>
+                    <button type="button" class="removePropertyValue" title="删除最后一个属性值" alt="删除最后一个属性值">-</button>
+                    <button type="button" class="convertPropertyOfImg" title="转换为图片显示的属性值" alt="转换为图片显示的属性值"><span class="fa fa-image"></span></button>
+                    <button type="button" class="convertPropertyOfText" title="转换为文字显示的属性值" alt="转换为文字显示的属性值">A</button>
+                </dt>
+
+                <dd><input placeholder="销售属性值" value="b1"></dd>
+                <dd><input placeholder="销售属性值" value="b2"></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+            </dl>
+            <hr />
+            <dl>
+                <dt>
+                    <input placeholder="销售属性名称" value=""><i>:</i>
+                    <button type="button" class="addPropertyValue" title="添加属性值" alt="添加属性值">+</button>
+                    <button type="button" class="removePropertyValue" title="删除最后一个属性值" alt="删除最后一个属性值">-</button>
+                    <button type="button" class="convertPropertyOfImg" title="转换为图片显示的属性值" alt="转换为图片显示的属性值"><span class="fa fa-image"></span></button>
+                    <button type="button" class="convertPropertyOfText" title="转换为文字显示的属性值" alt="转换为文字显示的属性值">A</button>
+                </dt>
+
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+            </dl>
+            <hr />
+            <dl>
+                <dt>
+                    <input placeholder="销售属性名称" value=""><i>:</i>
+                    <button type="button" class="addPropertyValue" title="添加属性值" alt="添加属性值">+</button>
+                    <button type="button" class="removePropertyValue" title="删除最后一个属性值" alt="删除最后一个属性值">-</button>
+                    <button type="button" class="convertPropertyOfImg" title="转换为图片显示的属性值" alt="转换为图片显示的属性值"><span class="fa fa-image"></span></button>
+                    <button type="button" class="convertPropertyOfText" title="转换为文字显示的属性值" alt="转换为文字显示的属性值">A</button>
+                </dt>
+
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+                <dd><input placeholder="销售属性值" value=""></dd>
+            </dl>
+            <hr />
+
+            <div class="shopProductSKUBtn" id="SKUfloppy">保存<i class="fa fa-floppy-o"></i></div>
+            <div class="shopProductSKUBtn" id="SKUrefresh">刷新<i class="fa fa-refresh"></i></div>
+            <div id="shopProductSKU" shop="false">显示商品详细搭配<i class="fa fa-chevron-down"></i></div>
+
+            <table id="productPropertyTable" border="1px">
+                <tr id="productPropertyTable-title">
+                    <td><span></span></td>
+                    <td><span></span></td>
+                    <td><span></span></td>
+                    <td><span></span></td>
+                    <td><span>存货</span><i id="stock-eraser" class="fa fa-eraser"></i></td>
+                    <td><span>价格(￥元)</span><i id="price-eraser" class="fa fa-eraser"></i></td>
+                </tr>
+                <!--<tr>-->
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <!--<td><input class="productPropertyTable-stock" type="text" value=""></td>-->
+                <!--<td><input class="productPropertyTable-price" type="text" value=""></td>-->
+                <!--</tr>-->
+            </table>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品描述：</label>
+        <div class="layui-input-inline">
+            <textarea name="describing" style=" width: 780px; height: 200px; border: 1px #d2d2d2 solid; padding:10px;"></textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <input type="text" style="display: none;" id="editor-content" name="content" value=""/>
+        <label class="layui-form-label">商品内容：</label>
+        <div class="layui-input-inline" style="width: 800px;">
+            <section id="editor">
+                <div id='edit' style="margin-top: 30px;">
+                    <h1 style="text-align: center;"><span data-fr-verified="true" style="color: #FF0000;">This my </span><span data-fr-verified="true" style="font-size: 52px; color: rgb(255, 0, 0);">BIG</span><span data-fr-verified="true" style="color: #FF0000;"> product！！！！！</span></h1>
+
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">详细图片(<i style=" font-size: 12px; color: red;">第一张为封面图片</i>)：</label>
+        <div class="layui-input-inline" style="width: 800px;">
+            <div id="uploaderImagesByLcyBtn" imgMaxNum="10">点击批量添加图片</div>
+            <input type="file" id="uploaderImagesByLcy" name="productMainImages" multiple="multiple"/>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div style="width: 182px; margin:0 auto;">
+            <!--layui-btn-disabled-->
+            <button type="submit" class="layui-btn" id="addShopSub" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary" onclick="validateSetFalse()" id="addadmin-reset">重置</button>
+        </div>
+    </div>
+</form>
+
+
+<script src="/sxxmall/plugin/layui/layui.js" charset="utf-8"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/jquery-1.10.2.js"></script>
+<script src="/sxxmall/plugin/jquery/jquery.cookie.js"></script>
+<script src="/sxxmall/backstage/assembly/js/base.js"></script>
+<script src="/sxxmall/plugin/jquery/jquery.form.js"></script>
+<script src="/sxxmall/plugin/selectproductbylcy/js/selectProduct.js"></script>
+
+
+<!-- 文本编辑器（必须用jquery1.10版本） -->
+<script src="/sxxmall/plugin/editor/froala_editor/js/froala_editor.min.js"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/langs/zh_cn.js"></script>
+<!--[if lt IE 9]>
+<script src="/sxxmall/plugin/editor/froala_editor/js/froala_editor_ie8.min.js"></script>
+<![endif]-->
+<script src="/sxxmall/plugin/editor/froala_editor/js/plugins/tables.min.js"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/plugins/lists.min.js"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/plugins/colors.min.js"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/plugins/media_manager.min.js"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/plugins/font_family.min.js"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/plugins/font_size.min.js"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/plugins/block_styles.min.js"></script>
+
+<!-- 文件上传 -->
+<script src="/sxxmall/plugin/uploaderimagesbylcy/js/uploaderimagesbylcy.js"></script>
+<script>
+    layui.config({
+        base: '/sxxmall/backstage/admin/js/'
+    }).use(['app'], function() {
+
+    });
+
+    function formSubmit(){
+        // 传sku属性key值
+        $('[name="skuValue"]').val(JSON.stringify(skuInofJsonOfAjax));
+        // 传sky价格与库存值
+        $('[name="skuDetailedInof"]').val(JSON.stringify(skuDetailedInof));
+        skuDetailedInof
+        var option = {
+            url : "http://localhost:8080/xxmall/backstage/productManage/insertProduct",
+            type: "post",
+            data: adminInfo,
+            success: function(data) {
+                if(data.errorCode == "200"){
+                    layer.alert(data.message,{icon:6});
+                }else{
+                    layer.alert(data.message,{icon:3});
+                }
+            },error:function () {
+                layer.alert("连接失败",{icon:3});
+
+            }
+        }
+        $("#addshop-form").ajaxSubmit(option);
+    }
+//  文本编辑器
+    $(function(){
+        $('#edit').editable({
+            inlineMode: false,
+            alwaysBlank: true,
+            language: "zh_cn", //设置为中文
+            height: "400px"
+        })
+    });
+    $('[lay-filter="formDemo"]').click(function () {
+        if($('#edit').find('textarea').length == 1){
+            $('#editor-content').attr('name','');
+            $('#edit').find('textarea').attr("name","content");
+        }else{
+            $('#editor-content').attr('name','content');
+            $('[name="content"]').val($('#edit').find(".froala-element").html());
+        }
+    });
+
+</script>
+</body>
+</html>

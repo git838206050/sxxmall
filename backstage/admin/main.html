@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>XX商城后台管理系统</title>
+    <link rel="stylesheet" href="/sxxmall/plugin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/sxxmall/plugin/layui/font-awesome/css/font-awesome.min.css" media="all">
+    <link rel="stylesheet" href="/sxxmall/backstage/admin/css/app.css" media="all">
+</head>
+
+<body>
+    <div class="layui-layout layui-layout-admin kit-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">sxxmall</div>
+            <div class="layui-logo kit-logo-mobile">K</div>
+            <ul class="layui-nav layui-layout-left kit-nav" kit-one-level>
+                <li class="layui-nav-item"><a href="javascript:;">控制台</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>
+            </ul>
+            <ul class="layui-nav layui-layout-right kit-nav">
+                <li class="layui-nav-item"><a href="javascript:;" id="pay"><i class="fa fa-gratipay" aria-hidden="true"></i> 捐赠我</a></li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" id="admin-nickname">
+                        <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img">
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">基本资料</a></dd>
+                        <dd><a href="javascript:;">安全设置</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="#" id="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black kit-side">
+            <div class="layui-side-scroll">
+                <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:;"><i class="layui-icon" aria-hidden="true">&#xe613;</i><span>管理员管理</span></a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/adminmanage/adminmanage.html',icon:'&#xe612;',title:'管理员信息',id:'1'}">
+                                    <i class="layui-icon" aria-hidden="true">&#xe612;</i>
+                                	<span>管理员信息</span>
+                                </a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" data-url="form.html" data-icon="fa-user" data-title="表单" kit-target data-options="{url:'/sxxmall/backstage/adminmanage/addadmin.html',icon:'&#xe654;',title:'添加管理员',id:'2'}" data-id='2'>
+                                    <i class="fa fa-plus"></i>
+                                    <span>添加管理员</span>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;"><i class="fa fa-users"></i><span>用户管理</span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/usermanage/usermanage.html',title:'用户信息',id:'3'}">
+                                <i class="fa fa-user"></i><span> 用户信息</span></a>
+                            </dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/usermanage/adduser.html',title:'添加用户',id:'4'}">
+                                <i class="fa fa-plus"></i><span> 添加用户</span></a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-university"></i><span>卖家管理</span><span class="layui-badge-dot"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/shopmanage/shopmanage.html',title:'店铺信息',id:'5'}">
+                                <i class="fa fa-university"></i><span> 店铺信息</span></a>
+                            </dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/shopmanage/addshop.html',title:'添加店铺',id:'6'}">
+                                <i class="fa fa-plus"></i><span> 添加店铺</span></a>
+                            </dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/usermanage/adduser.html',title:'待审核用户',id:'7'}">
+                                <i class="fa fa-spinner"></i><span> 待审核店铺</span><span class="layui-badge">99</span></a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;"><i class="fa fa-product-hunt"></i><span>商品管理</span><span class="layui-badge-dot"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/shopmanage/shopmanage.html',title:'商品信息',id:'8'}">
+                                <i class="fa fa-product-hunt"></i><span> 商品信息</span></a>
+                            </dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/productmanage/addproduct.html',title:'添加商品',id:'9'}">
+                                <i class="fa fa-plus"></i><span> 添加商品</span></a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 表格(page)</span></a>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" data-url="/views/form.html" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 表单(page)</span></a>
+                </li>
+                </ul>
+            </div>
+        </div>
+        <div class="layui-body" id="container">
+            <!-- 内容主体区域 -->
+            <div style="padding: 15px;">主体内容加载中,请稍等...</div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            2017 &copy;
+            <a href="http://kit.zhengjinfan.cn/">kit.zhengjinfan.cn/</a> MIT license
+
+        </div>
+    </div>
+    <!-- 
+    <script type="text/javascript">
+        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1264021086'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1264021086%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+     -->
+    <script src="/sxxmall/plugin/jquery/jquery-1.8.2.min.js"></script>
+    <script src="/sxxmall/backstage/admin/js/mainRequest.js"></script>
+    <script src="/sxxmall/plugin/layui/layui.js"></script>
+    <script src="/sxxmall/plugin/jquery/jquery.cookie.js"></script>
+    <script src="/sxxmall/backstage/admin/js/mainInfoWrite.js"></script>
+    <script>
+        var message;
+        layui.config({
+            base: '/sxxmall/backstage/admin/js/'
+        }).use(['app', 'message'], function() {
+            var app = layui.app,
+                $ = layui.jquery,
+                layer = layui.layer;
+            //将message设置为全局以便子页面调用
+            message = layui.message;
+            //主入口
+            app.set({
+                type: 'iframe'
+            }).init();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="jQuery" type="javaScript">
+    <properties>
+      <option name="frameworkName" value="jQuery" />
+      <option name="frameworkVersion" value="1.8.2" />
+    </properties>
+    <CLASSES>
+      <root url="file://G:/plugin/frontdesk/集工具/jQuery/jquery-1.8.2.min.js" />
+    </CLASSES>
+    <DOCUMENTATION>
+      <root url="file://$APPLICATION_CONFIG_DIR$/javascript/extLibs/http_api.jquery.com_resources_api.xml.xml" />
+      <root url="http://api.jquery.com" />
+    </DOCUMENTATION>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
