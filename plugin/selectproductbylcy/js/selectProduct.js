@@ -511,6 +511,7 @@ function getProductInofTrCount() {
 var skuInofJsonOfAjax = [{},{},{},{}];
 // 获取填写在input的所有值
 function getInputTexts() {
+    skuInofJsonOfAjax = [{},{},{},{}];
     var $sku_dl = $('#sku dl');
     var dtVal = '';// 单个的属性值
     var ddVal = '';// 单个的属性值
@@ -763,7 +764,6 @@ function SKUfloppyInOf() {
         default:
             break;
     }
-
     // alert(tr0Num+"<-0|"+tr1Num+"<-1|"+tr2Num+"<-2|"+tr3Num);
 }
 
@@ -788,6 +788,7 @@ $(function () {
             $('#productPropertyTable').css('display','none');
             $(this).html('显示商品详细搭配<i class="fa fa-chevron-down"></i>');
         }
+        SKUfloppyInOf();
     });
 
     $('#sku dl input').keyup(function(event){
@@ -806,6 +807,7 @@ $(function () {
         }else{
             $('#shopProductSKU').trigger('click');
         }
+        getInputTexts();
     });
 
     // 点击保存按钮

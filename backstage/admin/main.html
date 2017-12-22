@@ -93,11 +93,19 @@
                         </dl>
                     </li>
                     <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 表格(page)</span></a>
+                        <a href="javascript:;"><i class="fa fa-newspaper-o"></i><span>广告管理</span><span class="layui-badge-dot"></span></a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/advertisementmanage/showAdvertisements.html',title:'所有广告',id:'10'}">
+                                <i class="fa fa-newspaper-o"></i><span> 所有广告</span></a>
+                            </dd>
+                            <dd><a href="javascript:;" kit-target data-options="{url:'/sxxmall/backstage/advertisementmanage/addadvertise.html',title:'添加广告',id:'11'}">
+                                <i class="fa fa-plus"></i><span> 添加广告</span></a>
+                            </dd>
+                        </dl>
                     </li>
                     <li class="layui-nav-item">
                         <a href="javascript:;" data-url="/views/form.html" data-name="form" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 表单(page)</span></a>
-                </li>
+                    </li>
                 </ul>
             </div>
         </div>

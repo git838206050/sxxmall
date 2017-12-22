@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加广告</title>
+    <link rel="stylesheet" href="/sxxmall/plugin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/sxxmall/plugin/font-awesome/css/font-awesome.min.css">
+    <link href="/sxxmall/plugin/editor/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<form class="layui-form" action="javascript:formSubmit();" method="post" style="padding-top: 20px;" id="addshop-form" enctype="multipart/form-data">
+    <div class="layui-form-item">
+        <label class="layui-form-label">店铺ID：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="username" required  lay-verify="required" value="" placeholder="请输入店铺ID" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">广告名称：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="productname" required  lay-verify="required" value="" placeholder="请输入广告名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">URL路径（店铺路径）：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="discountprive" required  lay-verify="required" value="" placeholder="请输入广告跳转到的URL路径（店铺路径）" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">广告图片宽度（单位：px）：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="discountprive" required  lay-verify="required" value="" placeholder="广告图片宽度（单位：px）" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">广告图片高度（单位：px）：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="discountprive" required  lay-verify="required" value="123" placeholder="广告图片高度（单位：px）" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">是否固定显示：</label>
+        <div class="layui-input-block" style="width: 300px;">
+            <input name="sex" value="是" title="是" checked="" type="radio"/>
+            <input name="sex" value="否" title="否" type="radio"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所在的网页URL地址</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="discountprive" required  lay-verify="required" value="123" placeholder="显示广告的网页URL地址" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">到期时间：</label>
+        <div class="layui-input-inline">
+            <input class="layui-input" id="EndDate" placeholder="设置到期时间" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">广告图片：</label>
+        <div class="layui-input-inline" style="width: 800px;">
+            <input type="file" id="uploaderImagesByLcy" name="productMainImages" />
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div style="width: 182px; margin:0 auto;">
+            <!--layui-btn-disabled-->
+            <button type="submit" class="layui-btn" id="addShopSub" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary" onclick="validateSetFalse()" id="addadmin-reset">重置</button>
+        </div>
+    </div>
+</form>
+
+<script src="/sxxmall/plugin/layui/layui.js" charset="utf-8"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/jquery-1.10.2.js"></script>
+<script src="/sxxmall/plugin/jquery/jquery.cookie.js"></script>
+<script src="/sxxmall/backstage/assembly/js/base.js"></script>
+<script src="/sxxmall/plugin/jquery/jquery.form.js"></script>
+<script>
+    layui.use(['form','laydate'], function(){
+        var form = layui.form;
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#EndDate',
+            format : 'yyyy-MM-dd'//指定元素
+        });
+    });
+</script>
+</body>
+</html>
