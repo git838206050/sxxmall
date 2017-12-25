@@ -17,16 +17,17 @@
 <!-- 定义右边固定的操作栏 -->
 <script type="text/html" id="barDemo">
     <div style="display: none" id="showDate">
-        <input class="layui-input" id="selectDate" placeholder="yyyy-MM-dd HH:mm:ss" type="text">
+        <input class="layui-input" id="selectDate" placeholder="yyyy-MM-dd" type="text">
     </div>
     <button class="layui-btn layui-btn-mini" lay-event="daoqiTime">设置到期时间</button>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">编辑</a>
 </script>
 
 <script src="/sxxmall/plugin/layui/layui.js"></script>
 <script src="/sxxmall/plugin/jquery/jquery-1.8.2.min.js"></script>
 <script src="/sxxmall/plugin/jquery/jquery.cookie.js"></script>
 <script src="/sxxmall/backstage/assembly/js/base.js"></script>
+<script src="/sxxmall/backstage/advertisementmanage/js/showAdvertisements.js" media="all"></script>
+
 
 <script>
     layui.use(['table','laydate'], function() {
@@ -41,14 +42,14 @@
             ,height: '700' //容器高度
             ,cols: [[
                 {fixed:'left', field:'id', width:50,title:'序号'},
-                {field:'advertname', width:200,title:'广告名称'},
+                {field:'advertname', width:200,title:'广告名称',edit:'text'},
                 {field:'shopid', width:100,title:'店铺id'},
                 {field:'width', width:200,title:'宽度（单位：px）',edit:'text'},
-                {field:'height', width:200,title:'宽度（单位：px）'},
-                {field:'showurlposition', width:200,title:'显示的位置'},
+                {field:'height', width:200,title:'宽度（单位：px）',edit:'text'},
+                {field:'showurlposition', width:200,title:'显示的位置',edit:'text'},
                 {field:'creattime', width:200,title:'创建时间'},
                 {field:'expiretime', width:200,title:'到期时间'},
-                {field:'isfixedshow', width:130,title:'是否固定显示',},
+                {field:'isfixedshow', width:130,title:'是否固定显示',edit:'text'},
                 {fixed: 'right', width:300, align:'center', toolbar: '#barDemo',title:'操作'}
             ]] //设置表头
             ,page: true     // 是否分页
@@ -91,13 +92,13 @@
                 // 是否固定显示
                 $isfixedshow.each(function (index) {
                     if(index != 0){
-                        var time1 = dateState($(this).text());
-                        if(time1 == 1){
-                            // 封号
+                        var str = $(this).text();
+                        if(str == "1"){
                             $(this).text("是");
+                            $(this).attr("attr-value","1");
                         }else{
-                            // 不封号
                             $(this).text("否");
+                            $(this).attr("attr-value",str);
                         }
                     }
                 });
@@ -106,7 +107,6 @@
                 table.on('tool(advertisementsData)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
                     var data = obj.data //获得当前行数据
                         ,layEvent = obj.event; //获得 lay-event 对应的值
-                    // 执行更新禁止登陆时间请求
                     if(layEvent === 'daoqiTime'){
                         layer.open({
                             type:1,
@@ -117,17 +117,18 @@
                             area: ['240px', '240px'],
                             btn:['确定','取消'],
                             yes: function(){
-                                ajaxLoginTime(obj.data.id, $('#selectDate').val());
+                                ajaxUpdateExpiretime(obj.data.id, $('#selectDate').val());
                             }
                         });
-                    } else if(layEvent === 'del'){
-                        layer.confirm('确定删除行吗？', function(index){
-//                                obj.del(); //删除对应行（tr）的DOM结构
-//                                layer.close(index);
-                            //向服务端发送删除指令
-                            ajaxDeleteAdmin(obj.data.id);
-                        });
                     }
+//                    else if(layEvent === 'del'){
+//                        layer.confirm('确定删除行吗？', function(index){
+////                                obj.del(); //删除对应行（tr）的DOM结构
+////                                layer.close(index);
+//                            //向服务端发送删除指令
+//                            ajaxDeleteAdmin(obj.data.id);
+//                        });
+//                    }
                 });
 
                 //监听单元格编辑
@@ -135,10 +136,20 @@
                     var value = obj.value //得到修改后的值
                         ,data = obj.data //得到所在行所有键值
                         ,field = obj.field; //得到字段
-                    if(field == "nickname"){
-                        ajaxUpdataAdminOfNickname(data.id,value);
-                    }else if(field == "email"){
-                        ajaxUpdataAdminOfEmail(data.id,value);
+                    if(field == "advertname"){
+                        ajaxUpdataAdvertname(data.id,value);
+                    }else if(field == "width"){
+                        ajaxUpdataWidth(data.id,value);
+                    }else if(field == "height"){
+                        ajaxUpdataHeight(data.id,value);
+                    }else if(field == "showurlposition"){
+                        ajaxUpdataShowurlposition(data.id,value);
+                    }else if(field == "isfixedshow"){
+                        if(value == "是" || value == "1"){
+                            ajaxUpdataIsfixedshow(data.id,1);
+                        }else{
+                            ajaxUpdataIsfixedshow(data.id,0);
+                        }
                     }
                     //  layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
                 });
@@ -146,8 +157,7 @@
                 // 显示时间。墨绿主题
                 laydate.render({
                     elem: '#selectDate'
-                    ,theme: 'molv'
-                    ,type:'datetime'
+                    ,format : 'yyyy-MM-dd'
                 });
             }
         });
