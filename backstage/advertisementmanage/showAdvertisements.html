@@ -147,8 +147,13 @@
                     }else if(field == "isfixedshow"){
                         if(value == "是" || value == "1"){
                             ajaxUpdataIsfixedshow(data.id,1);
-                        }else{
+                        }else if(value == "否" || value == "0"){
                             ajaxUpdataIsfixedshow(data.id,0);
+                        }else{
+                            layer.msg("操作失败，只能填写'是、否'或‘1、0’");
+                            setTimeout(function () {
+                                $('.layui-laypage-btn').trigger("click");
+                            },1000);
                         }
                     }
                     //  layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
