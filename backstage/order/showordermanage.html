@@ -9,17 +9,19 @@
 <table id="orderData" lay-filter="orderData"></table>
 
 <!-- 定义右边固定的操作栏 -->
+<!--
 <script type="text/html" id="barDemo">
     <div style="display: none" id="showDate">
         <input class="layui-input" id="selectDate" placeholder="yyyy-MM-dd" type="text">
     </div>
     <button class="layui-btn layui-btn-mini" lay-event="daoqiTime">设置到期时间</button>
 </script>
-
+-->
 <script src="/sxxmall/plugin/layui/layui.js"></script>
 <script src="/sxxmall/plugin/jquery/jquery-1.8.2.min.js"></script>
 <script src="/sxxmall/plugin/jquery/jquery.cookie.js"></script>
 <script src="/sxxmall/backstage/assembly/js/base.js"></script>
+<script src="/sxxmall/backstage/order/js/showordermanage.js"></script>
 
 
 <script>
@@ -35,8 +37,17 @@
             ,height: '700' //容器高度
             ,cols: [[
                 {fixed:'left', field:'id', width:50,title:'序号'},
-                {field:'userid', width:200,title:'用户id'},
-                {fixed: 'right', width:300, align:'center', toolbar: '#barDemo',title:'操作'}
+                {field:'orderstatus', width:150,title:'订单状态',edit:'text'},
+                {field:'userid', width:80,title:'用户id'},
+                {field:'productid', width:80,title:'商品id'},
+                {field:'price', width:80,title:'价格'},
+                {field:'deliveraddress', width:200,title:'收货地址',edit:'text'},
+                {field:'sendaddress', width:200,title:'发货地址'},
+                {field:'createtime', width:160,title:'创建时间'},
+                {field:'expressno', width:200,title:'快递号',edit:'text'},
+                {field:'expressname', width:200,title:'快递名称',edit:'text'}
+//                ,
+//                {fixed: 'right', width:300, align:'center', toolbar: '#barDemo',title:'操作'}
             ]] //设置表头
             ,page: true     // 是否分页
             ,limit:15       // 默认每页显示数量
@@ -44,8 +55,10 @@
             ,loading:true   // 加载中时显示的加载条
             ,done:function (res) { // 加载完毕后
                 var $num = $("[data-field='id']");
-                var $creattime = $('.laytable-cell-1-creattime');
+                var $createtime = $('.laytable-cell-1-createtime');
                 var $orderstatus = $('.laytable-cell-1-orderstatus');
+                var $expressno = $('.laytable-cell-1-expressno');
+                var $expressname = $('.laytable-cell-1-expressname');
                 var numMax = $num.size()/2;
                 var page = res.page;
                 var limit = res.limit;
@@ -61,15 +74,34 @@
                     }
                 });
                 // 创建时间
-                $creattime.each(function (index) {
+                $createtime.each(function (index) {
                     if(index != 0){
                         var time1 = new Date($(this).text()).Format("yyyy-MM-dd hh:mm:ss");
                         $(this).text(time1);
                     }
                 });
+                $expressno.each(function (index) {
+                    if(index != 0){
+                        var str = $(this).text();
+                        if(str=="" || str=="undefined"){
+                            $(this).text("暂无");
+                        }
+                    }
+                });
+                $expressname.each(function (index) {
+                    if(index != 0){
+                        var str = $(this).text();
+                        if(str=="" || str=="undefined"){
+                            $(this).text("暂无");
+                        }
+                    }
+                });
                 $orderstatus.each(function (index) {
                     if(index != 0){
                         var str = $(this).text();
+                        var title = "输入对应的值更新。0:待发货。1:用户确定收货。2:配送中。3:用户取消。4:用户退货。5:用户拒收。";
+                        $(this).attr("title",title);
+                        $(this).attr("alt",title);
                         if(str == "0"){
                             $(this).text("待发货");
                             $(this).attr("attr-value",str);
@@ -117,14 +149,14 @@
                     var value = obj.value //得到修改后的值
                         ,data = obj.data //得到所在行所有键值
                         ,field = obj.field; //得到字段
-                    if(field == "advertname"){
-                        ajaxUpdataAdvertname(data.id,value);
-                    }else if(field == "width"){
-                        ajaxUpdataWidth(data.id,value);
-                    }else if(field == "height"){
-                        ajaxUpdataHeight(data.id,value);
-                    }else if(field == "showurlposition"){
-                        ajaxUpdataShowurlposition(data.id,value);
+                    if(field == "expressno"){
+                        ajaxUpdataExpressno(data.id,value);
+                    }else if(field == "expressname"){
+                        ajaxUpdataExpressName(data.id,value);
+                    }else if(field == "deliveraddress"){
+                        ajaxUpdataDeliverAddress(data.id,value);
+                    }else if(field == "orderstatus"){
+                        ajaxUpdataOrderStatus(data.id,value);
                     }else if(field == "isfixedshow"){
                         if(value == "是" || value == "1"){
                             ajaxUpdataIsfixedshow(data.id,1);

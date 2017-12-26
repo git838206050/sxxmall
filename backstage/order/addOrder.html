@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加广告</title>
+    <link rel="stylesheet" href="/sxxmall/plugin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/sxxmall/plugin/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+
+<form class="layui-form" action="javascript:formSubmit();" method="post" style="padding-top: 20px;" id="addOrder-form" enctype="multipart/form-data">
+    <div class="layui-form-item">
+        <label class="layui-form-label">商品ID：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="productId" required  lay-verify="required" value="3" placeholder="商品ID" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户ID：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="userId" required  lay-verify="required" value="3" placeholder="用户ID" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">价格：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="price" required  lay-verify="required" value="998" placeholder="价格" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">发货地址：</label>
+        <div class="layui-input-inline" style="width: 300px;">
+            <input type="text" name="deliverAddress" required  lay-verify="required" value="这是发货地址" placeholder="发货地址" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary" id="addadmin-reset">重置</button>
+        </div>
+    </div>
+</form>
+
+<script src="/sxxmall/plugin/layui/layui.js" charset="utf-8"></script>
+<script src="/sxxmall/plugin/editor/froala_editor/js/jquery-1.10.2.js"></script>
+<script src="/sxxmall/plugin/jquery/jquery.cookie.js"></script>
+<script src="/sxxmall/backstage/assembly/js/base.js"></script>
+<script src="/sxxmall/plugin/jquery/jquery.form.js"></script>
+<script>
+    layui.use(['form','laydate'], function(){
+        var form = layui.form;
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#EndDate',
+            format : 'yyyy-MM-dd'//指定元素
+        });
+    });
+    function formSubmit(){
+        var option = {
+            url : "http://localhost:8080/xxmall/backstage/orderManage/insertOrder",
+            type: "post",
+            data: adminInfo,
+            success: function(data) {
+                if(data.errorCode == "200"){
+                    layer.alert(data.message,{icon:6});
+                    $('#addAdvertise-reset').trigger('click');
+                }else {
+                    layer.alert(data.message,{icon:3});
+                }
+            }
+        }
+        $("#addOrder-form").ajaxSubmit(option);
+    }
+</script>
+</body>
+</html>
