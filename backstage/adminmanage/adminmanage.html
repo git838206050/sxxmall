@@ -65,6 +65,7 @@
                     var $num = $("[data-field='id']");
                     var $creattime = $('.laytable-cell-1-creattime');
                     var $prohibitlogintime = $('.laytable-cell-1-prohibitlogintime');
+                    var $headerurl = $('.laytable-cell-1-headerurl');
                     var numMax = $num.size()/2;
                     var page = res.page;
                     var limit = res.limit;
@@ -86,6 +87,15 @@
 //                      var nowStr = $(this).text().format("yyyy-MM-dd hh:mm:ss");
                         var time1 = new Date($(this).text()).Format("yyyy-MM-dd hh:mm:ss");
                             $(this).text(time1);
+                        }
+                    });
+
+                    $headerurl.each(function (index) {
+                        if(index != 0){
+                            var text = $(this).text();
+                            if(text.substring(text.length-4,text.length) == "null"){
+                                $(this).text("暂无");
+                            }
                         }
                     });
 

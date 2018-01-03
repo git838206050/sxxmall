@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>审核商品</title>
+    <link rel="stylesheet" href="/sxxmall/plugin/layui/css/layui.css" media="all">
+</head>
+<body>
+<table id="orderData" lay-filter="orderData"></table>
+
+<!-- 定义右边固定的操作栏 -->
+<!--
+<script type="text/html" id="barDemo">
+    <div style="display: none" id="showDate">
+        <input class="layui-input" id="selectDate" placeholder="yyyy-MM-dd" type="text">
+    </div>
+    <button class="layui-btn layui-btn-mini" lay-event="daoqiTime">设置到期时间</button>
+</script>
+-->
+<script src="/sxxmall/plugin/layui/layui.js"></script>
+<script src="/sxxmall/plugin/jquery/jquery-1.8.2.min.js"></script>
+<script src="/sxxmall/plugin/jquery/jquery.cookie.js"></script>
+<script src="/sxxmall/backstage/assembly/js/base.js"></script>
+<script src="/sxxmall/backstage/order/js/showordermanage.js"></script>
+
+
+<script>
+    layui.use(['table','laydate'], function() {
+        var table = layui.table;
+        var laydate = layui.laydate;
+        var $ = layui.jquery;
+        // 表格数据
+        table.render({
+            url:"http://localhost:8080/xxmall/backstage/productManage/showProductByProductState"
+            ,where:{adminId:adminInfo.adminId,token:adminInfo.token}
+            ,elem: '#orderData' //指定原始表格元素选择器（推荐id选择器）
+            ,height: '700' //容器高度
+            ,cols: [[
+                {fixed:'left', field:'id', width:50,title:'序号'},
+                {field:'productstate', width:150,title:'商品状态'},
+                {field:'uploaduserid', width:200,title:'上传商品的用户id'},
+                {field:'originalprive', width:80,title:'原价格'},
+                {field:'discountprive', width:80,title:'现价格',edit:'text'},
+//                {field:'sendaddress', width:250,title:'发货地址'},
+                {field:'creattime', width:180,title:'创建时间'},
+                {field:'describing', width:200,title:'描述'},
+                {field:'mainimageurl', width:200,title:'主图片'}
+//                ,
+//                {fixed: 'right', width:300, align:'center', toolbar: '#barDemo',title:'操作'}
+            ]] //设置表头
+            ,page: true     // 是否分页
+            ,limit:15       // 默认每页显示数量
+            ,limits: [15,20,30,40,50]   // 可选的每页显示数量
+            ,loading:true   // 加载中时显示的加载条
+            ,done:function (res) { // 加载完毕后
+                var $num = $("[data-field='id']");
+                var $createtime = $('.laytable-cell-1-creattime');
+                var $productstate = $('.laytable-cell-1-productstate');
+                var $expressno = $('.laytable-cell-1-expressno');
+                var $expressname = $('.laytable-cell-1-expressname');
+                var numMax = $num.size()/2;
+                var page = res.page;
+                var limit = res.limit;
+                var start = page*limit-limit;
+                // 序号
+                $num.each(function (index) {
+                    if(index != 0 && index != (numMax)){
+                        if(index > numMax){
+                            $(this).find(".laytable-cell-1-id").text(start+index-numMax);
+                        }else{
+                            $(this).find(".laytable-cell-1-id").text(start+index);
+                        }
+                    }
+                });
+                // 创建时间
+                $createtime.each(function (index) {
+                    if(index != 0){
+                        var time1 = new Date($(this).text()).Format("yyyy-MM-dd hh:mm:ss");
+                        $(this).text(time1);
+                    }
+                });
+                $productstate.each(function (index) {
+                    if(index != 0){
+                        var str = $(this).text();
+                        var title = "输入对应的值更新。商品状态（1:上架中;0：待审核; -1：下架；-2：禁止出售;-3:被删除）";
+                        $(this).attr("title",title);
+                        $(this).attr("alt",title);
+                        if(str == "0"){
+                            $(this).text("待审核");
+                            $(this).attr("attr-value",str);
+                        }else if(str == "1"){
+                            $(this).text("上架中");
+                            $(this).attr("attr-value",str);
+                        }else if(str == "-1"){
+                            $(this).text("下架");
+                            $(this).attr("attr-value",str);
+                        }else if(str == "-2"){
+                            $(this).text("禁止出售");
+                            $(this).attr("attr-value",str);
+                        }else if(str == "-3"){
+                            $(this).text("被删除");
+                            $(this).attr("attr-value",str);
+                        }
+                    }
+                });
+
+                //监听按钮
+                table.on('tool(orderData)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+                    var data = obj.data //获得当前行数据
+                        ,layEvent = obj.event; //获得 lay-event 对应的值
+                    if(layEvent === 'daoqiTime'){
+                        layer.open({
+                            type:1,
+                            content:$('#showDate'),
+                            title:"选择时间",
+                            shadeClose: true,
+                            shade: false,
+                            area: ['240px', '240px'],
+                            btn:['确定','取消'],
+                            yes: function(){
+                                ajaxUpdateExpiretime(obj.data.id, $('#selectDate').val());
+                            }
+                        });
+                    }
+                });
+
+                //监听单元格编辑
+                table.on('edit(orderData)', function(obj){
+                    var value = obj.value //得到修改后的值
+                        ,data = obj.data //得到所在行所有键值
+                        ,field = obj.field; //得到字段
+                    if(field == "expressno"){
+                        ajaxUpdataExpressno(data.id,value);
+                    }else if(field == "expressname"){
+                        ajaxUpdataExpressName(data.id,value);
+                    }else if(field == "deliveraddress"){
+                        ajaxUpdataDeliverAddress(data.id,value);
+                    }else if(field == "orderstatus"){
+                        ajaxUpdataOrderStatus(data.id,value);
+                    }else if(field == "isfixedshow"){
+                        if(value == "是" || value == "1"){
+                            ajaxUpdataIsfixedshow(data.id,1);
+                        }else if(value == "否" || value == "0"){
+                            ajaxUpdataIsfixedshow(data.id,0);
+                        }else{
+                            layer.msg("操作失败，只能填写'是、否'或‘1、0’");
+                            setTimeout(function () {
+                                $('.layui-laypage-btn').trigger("click");
+                            },1000);
+                        }
+                    }
+                    //  layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value);
+                });
+
+                // 显示时间。墨绿主题
+                laydate.render({
+                    elem: '#selectDate'
+                    ,format : 'yyyy-MM-dd'
+                });
+            }
+        });
+
+    });
+</script>
+</body>
+</html>
