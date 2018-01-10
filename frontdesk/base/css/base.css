@@ -1,5 +1,8 @@
-html,body{height: 0px; width:0px;}
+html,body{height: 100%; width: 100%}
 *{ margin:0px; padding:0px;}
 img{ border: none;}
 dd{text-indent: 0px;}
 a{ text-decoration: none; color: #000;}
+li{ list-style: none;}
+
+.base-box{ width:1190px; margin: 0 auto;}

@@ -1,0 +1,5 @@
+#nav{ width: 190px; height: 520px; border:1px solid #f50;}
+#nav li{ height: 32px;font-size: 14px; line-height: 32px; padding-left: 25px;padding-right: 9px; color: #666; font-weight: 400; overflow: hidden; font-family: '微软雅黑';}
+#nav li:hover{ background-color: #ffe4dc; color:#FF5000;}
+#nav li:hover a{ color:#FF5000;}
+#nav li i{ float: right; font-size: 16px;}
