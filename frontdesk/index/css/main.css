@@ -1,5 +1,14 @@
-#nav{ width: 190px; height: 520px; border:1px solid #f50;}
-#nav li{ height: 32px;font-size: 14px; line-height: 32px; padding-left: 25px;padding-right: 9px; color: #666; font-weight: 400; overflow: hidden; font-family: '微软雅黑';}
+#nav{ width: 190px; height: 520px; border:1px solid #f50; float: left; position: relative;}
+#nav li{ height: 32px;font-size: 14px; line-height: 32px; padding-left: 15px;padding-right: 9px; color: #666; font-weight: 400; overflow: hidden; font-family: '微软雅黑'; overflow:hidden; text-overflow:ellipsis; word-wrap:break-word;}
 #nav li:hover{ background-color: #ffe4dc; color:#FF5000;}
+
 #nav li:hover a{ color:#FF5000;}
 #nav li i{ float: right; font-size: 16px;}
+
+#nav-more{ width: 530px; height: 520px; background-color: #fff; position: absolute; top: -1px; left: 190px; border: 1px solid #f50; display: block;}
+#nav-more > div{ width: 530px; height: 520px; display: block;}
+#nav-more > div >h3{ margin-left: 25px; margin-top: 10px; height: 36px; line-height: 36px; font-size: 16px;color: #333;}
+
+#cord1{ width:520px; height: 520px; border-top: 1px solid #fff; float: left; background-color: #00a2d4; margin-left:10px; margin-right:10px;}
+#cord2{width: 160px; height: 520px; background-color: #00a2d4; float: left;}
+#cord3{width: 290px; height: 520px; background-color: #00a2d4; float: right;}
